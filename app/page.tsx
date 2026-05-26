@@ -372,9 +372,6 @@ export default function Home() {
             <h2 className="mt-5 font-serif text-[clamp(2.8rem,5vw,4.5rem)] leading-none text-white">
               Not just another developer.
             </h2>
-            <p className="mt-5 max-w-2xl text-sm leading-7 text-stone-100 md:text-base">
-              I’m Harshita — a frontend engineer with a deep curiosity for AI, storytelling, branding, digital aesthetics, and building things that feel alive. I love experimenting with ideas, interfaces, human behavior, internet culture, and immersive digital experiences. Somewhere between engineering and art is where I feel most at home.
-            </p>
           </div>
 
           <motion.div
