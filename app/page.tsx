@@ -6,85 +6,111 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-import genMonkVisualStorytelling from '../pictures/ChatGPT Image May 26, 2026, 05_28_35 PM.png';
-import genMonkVisualStorytellingAlt from '../pictures/ChatGPT Image May 26, 2026, 05_55_22 PM.png';
-import genMonkVisualStorytellingThird from '../pictures/ChatGPT Image May 26, 2026, 06_16_00 PM.png';
-
 const heroImage = '/api/profile-image';
 
-const projects = [
+type ProjectGalleryItem = {
+  src: string;
+  caption: string;
+};
+
+type ProjectItem = {
+  title: string;
+  category: string;
+  elevatorPitch: string;
+  description: string;
+  preview: string;
+  accent: string;
+  stats: string[];
+  projectLink?: string;
+  gallery?: ProjectGalleryItem[];
+  tech: string[];
+};
+
+const projects: ProjectItem[] = [
   {
-    title: 'AI Dental SaaS Waitlist',
-    category: 'Brand + Landing Experience',
+    title: 'AI Voice Agent Platform',
+    category: 'Automation + Conversational Systems',
+    elevatorPitch:
+      'An AI-powered voice agent that automates conversations and business workflows with calendar and spreadsheet integration.',
     description:
-      'Built a landing page validating an AI-powered dental workflow product for US clinics, focused on trust, clarity, and conversion.',
+      'Built an intelligent voice agent using n8n, LLMs, APIs, and workflow automation. The system handles natural conversations, automates repetitive tasks, and connects with external business tools for scheduling and structured data capture.',
     preview:
-      'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80',
-    accent: 'AI-powered product narrative for clinical teams.',
-    stats: ['+38% engagement lift', '3-week sprint', 'conversion-first storytelling'],
-    projectLink: 'https://dezy-ai-chi.vercel.app/'
-  },
-  {
-    title: 'AI + Visual Storytelling Lab',
-    category: 'Brand visuals + storytelling systems',
-    description:
-      "Designed GenMonk's brand visual for Instagram — concept exploring their 'ancient wisdom meets AI' positioning.",
-    preview: genMonkVisualStorytelling.src,
-    accent: 'A concept-led visual study blending cultural symbolism, premium brand cues, and AI-era narrative.',
-    stats: ['Instagram campaign concept', 'brand world building', 'visual storytelling direction'],
-    gallery: [
-      {
-        src: genMonkVisualStorytelling.src,
-        caption:
-          'In an age of endless digital noise, clarity becomes the ultimate competitive advantage.\n\nAt GenMonk, we blend ancient discipline with modern AI systems to craft brands, stories, and experiences that don’t just capture attention — they leave a lasting legacy.\n\nWhere human intuition meets machine precision.\nWhere storytelling becomes strategy.\nWhere innovation feels timeless.\n\nGenMonk — Where Ancient Wisdom Meets Digital Innovation.\n\n#GenMonk #AIInnovation #DigitalStorytelling #BrandStrategy #CreativeDirection #LuxuryBranding #FutureOfMarketing #AIMarketing #VisualStorytelling #BrandIdentity #CreativeTechnology #MarketingAgency #DigitalInnovation #CinematicBranding #HumanCenteredAI'
-      },
-      {
-        src: genMonkVisualStorytellingAlt.src,
-        caption:
-          'The future of marketing isn’t louder.\nIt’s clearer. More intentional. More human.\n\nGenMonk combines strategic thinking, cinematic storytelling, and AI-powered innovation to build brands that resonate beyond trends and algorithms.\n\nBuilt for visionaries.\nDesigned for impact.\n\nWhere Ancient Wisdom Meets Digital Innovation.\n\n#GenMonk #CreativeAgency #AIMarketing #BrandStorytelling #DigitalCulture #LuxuryMarketing #CreativeStudio #ArtificialIntelligence #VisualIdentity #ModernBranding #FutureBrands #CreativeTechnology #MarketingInnovation #HumanAndMachine'
-      },
-      {
-        src: genMonkVisualStorytellingThird.src,
-        caption:
-          'Not human versus machine.\nHuman with machine.\n\nGenMonk exists at the intersection of philosophy, storytelling, branding, and intelligent systems — building modern digital experiences that feel emotional, immersive, and unforgettable.\n\nFocused like monks.\nInnovative like AI.\n\n#GenMonk #AIBranding #CreativeDirection #DigitalInnovation #FutureOfBranding #Storytelling #LuxuryCreative #AestheticMarketing #VisualCampaign #AICreative #BrandExperience #ModernMarketing #ExperimentalDesign #CinematicVisuals'
-      }
-    ]
+      'https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=80',
+    accent: 'Designed for scalable automation and real-world utility.',
+    stats: ['Agentic AI', 'n8n Workflows', 'Conversational AI'],
+    projectLink: '',
+    tech: ['n8n', 'Python', 'APIs', 'LLMs']
   },
   {
     title: 'Financial Document Intelligence System',
-    category: 'AI systems + insight UX',
+    category: 'Document Intelligence + Analytics',
+    elevatorPitch: 'Transforming complex financial reports into actionable insights.',
     description:
-      'Designed an intelligence layer for extracting insights from financial reports, with an elegant interface for analysts and operators.',
+      'Designed an AI-powered platform that extracts, organizes, and surfaces insights from financial documents through a clean and intuitive interface. Built for analysts and operators who need faster access to critical information and trends hidden within large reports.',
     preview:
       'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80',
     accent: 'Brought precision and visual calm to complex data workflows.',
-    stats: ['document OCR flow', 'multi-view dashboards', 'rapid insights'],
-    projectLink: 'https://fin-doc-ai-8psk3aybfbihvfjyajtdf3.streamlit.app/'
+    stats: ['Financial Analytics', 'AI-Powered Search', 'Document Intelligence'],
+    projectLink: 'https://fin-doc-ai-8psk3aybfbihvfjyajtdf3.streamlit.app/',
+    tech: ['React', 'TypeScript', 'AI Workflows']
+  },
+  {
+    title: 'Amazon ML Challenge – Product Attribute Extraction',
+    category: 'Computer Vision + OCR',
+    elevatorPitch: 'End-to-end AI pipeline for extracting product attributes from images.',
+    description:
+      'Developed a computer vision and OCR pipeline capable of extracting measurements and product attributes directly from images. Built during the Amazon ML Challenge with a focus on scalability, accuracy, and automated information extraction.',
+    preview:
+      'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=80',
+    accent: 'Focused on accuracy, automation, and extraction at scale.',
+    stats: ['Computer Vision', 'OCR', 'AI Pipelines'],
+    tech: ['Python', 'PaddleOCR', 'Machine Learning']
+  },
+  {
+    title: 'AI Dental SaaS Waitlist',
+    category: 'Landing Page + Validation',
+    elevatorPitch:
+      'Landing page and validation system for an AI-powered dental workflow platform.',
+    description:
+      'Designed and developed a conversion-focused landing page for an AI-powered dental operations platform targeting clinics in the United States. The project emphasized trust-building, product positioning, and user acquisition.',
+    preview:
+      'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80',
+    accent: 'Built to support product validation and startup traction.',
+    stats: ['Product Validation', 'SaaS', 'Conversion Optimization'],
+    projectLink: 'https://dezy-ai-chi.vercel.app/',
+    tech: ['React', 'TypeScript', 'TailwindCSS']
   }
 ];
 
 const experience = [
   {
-    title: 'Frontend Engineer Intern',
+    title: 'Frontend Engineer',
     company: 'DevRev',
-    period: '2025 — Present',
+    period: 'September 2025 — Present',
     blurb:
-      'Worked on frontend systems in a fast-moving product environment, shipping polished user-facing experiences and solving production issues with performance and clarity in mind.'
+      'Built and delivered user-facing features using React and TypeScript, focusing on performance, usability, and product quality.'
+  },
+  {
+    title: 'Software Engineer Intern',
+    company: 'Zummit Infolabs',
+    period: 'June 2024 — August 2024',
+    blurb:
+      'Built AI-powered solutions using LLMs, prompt engineering, YOLO, and machine learning workflows, contributing to innovative product prototypes in a fast-paced startup environment.'
   }
 ];
 
 const categories = [
   {
-    title: 'Engineering',
-    items: ['React', 'TypeScript', 'Next.js', 'Tailwind', 'APIs', 'AI/ML']
+    title: 'Build',
+    items: ['React', 'TypeScript', 'Python', 'APIs', 'n8n Automation']
   },
   {
-    title: 'Creative',
-    items: ['Branding', 'Storytelling', 'Creative Direction', 'Visual Thinking', 'Writing']
+    title: 'Create',
+    items: ['LLMs', 'Prompt Engineering', 'AI Workflows', 'Product Design', 'Prototyping']
   },
   {
-    title: 'AI',
-    items: ['Prompt Engineering', 'AI Tools', 'Workflow Automation', 'Experimental Interfaces']
+    title: 'Explore',
+    items: ['Agentic AI', 'Computer Vision', 'Research', 'Emerging Tools', 'Experimentation']
   }
 ];
 
@@ -93,10 +119,8 @@ const sections = ['hero', 'about', 'work', 'experience', 'skills', 'philosophy',
 export default function Home() {
   const [ready, setReady] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
-  const [activeProject, setActiveProject] = useState(projects[0]);
+  const [activeProject, setActiveProject] = useState<ProjectItem>(projects[0]);
   const [progress, setProgress] = useState(0);
-  const [cursor, setCursor] = useState({ x: 0, y: 0 });
-  const [trail, setTrail] = useState<Array<{ x: number; y: number; id: number }>>([]);
   const heroRef = useRef<HTMLElement | null>(null);
   const lenisRef = useRef<Lenis | null>(null);
   const modalContentRef = useRef<HTMLDivElement | null>(null);
@@ -191,16 +215,6 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const onMove = (event: MouseEvent) => {
-      setCursor({ x: event.clientX, y: event.clientY });
-      setTrail((prev) => [{ x: event.clientX, y: event.clientY, id: Date.now() }, ...prev].slice(0, 8));
-    };
-
-    window.addEventListener('mousemove', onMove);
-    return () => window.removeEventListener('mousemove', onMove);
-  }, []);
-
-  useEffect(() => {
     const lenis = lenisRef.current;
 
     if (!lenis) {
@@ -220,7 +234,7 @@ export default function Home() {
     };
   }, [isModalOpen]);
 
-  const openProject = (project: (typeof projects)[number]) => {
+  const openProject = (project: ProjectItem) => {
     setActiveProject(project);
     setModalOpen(true);
   };
@@ -268,30 +282,6 @@ export default function Home() {
       <div className="fixed top-0 left-0 right-0 z-40 h-1 bg-transparent">
         <div className="h-full bg-gradient-to-r from-crimson to-[#f3c4b7]" style={{ width: `${progress}%` }} />
       </div>
-
-      <div
-        className="pointer-events-none fixed z-30 rounded-full opacity-70 blur-2xl"
-        style={{
-          left: cursor.x - 48,
-          top: cursor.y - 48,
-          width: 96,
-          height: 96,
-          background: 'radial-gradient(circle, rgba(158,27,50,0.7) 0%, rgba(158,27,50,0.15) 45%, transparent 70%)'
-        }}
-      />
-      {trail.map((point) => (
-        <div
-          key={point.id}
-          className="pointer-events-none fixed z-20 rounded-full border border-white/20 bg-white/5"
-          style={{
-            left: point.x - 12,
-            top: point.y - 12,
-            width: 24,
-            height: 24,
-            opacity: 0.3
-          }}
-        />
-      ))}
 
       <header className="nav-shell">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 text-sm text-stone-200 md:px-10">
@@ -366,48 +356,43 @@ export default function Home() {
       </section>
 
       <section id="about" className="relative px-5 py-20 md:px-10">
-        <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1.1fr_1.2fr] md:items-end">
-          <div data-reveal>
+        <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-start">
+          <div data-reveal className="pt-4 md:pt-10">
             <p className="text-xs uppercase tracking-[0.45em] text-crimson">About me</p>
-            <h2 className="mt-5 font-serif text-[clamp(2.8rem,5vw,4.5rem)] leading-none text-white">
-              Not just another developer.
+            <h2 className="mt-6 font-serif text-[clamp(2.8rem,5vw,4.5rem)] leading-none text-white">
+              Not just one kind of builder.
             </h2>
           </div>
 
-          <motion.div
+          <div
             data-reveal
-            className="glass-panel rounded-[2rem] p-6 md:p-8"
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.35 }}
-            style={{
-              x: cursor.x / 90 - 12,
-              y: cursor.y / 100 - 12,
-              background: 'rgba(0, 0, 0, 0.98)',
-              border: '1px solid rgba(255, 255, 255, 0.12)'
-            }}
+            className="pt-6 md:pt-16"
           >
             <p className="text-xs uppercase tracking-[0.34em] text-mist/90">Summary</p>
-            <p className="mt-3 text-base leading-8 text-white md:text-lg">
-              I’m Harshita — a frontend engineer with a deep curiosity for AI, storytelling, branding, digital aesthetics, and building things that feel alive. I love experimenting with ideas, interfaces, human behavior, internet culture, and immersive digital experiences. Somewhere between engineering and art is where I feel most at home.
+            <p className="mt-4 max-w-3xl text-base leading-8 text-white md:text-lg">
+              I’m Harshita — I build digital experiences, product stories, and systems that feel thoughtful, useful, and alive. I like moving between strategy, design, engineering, and experimentation, especially when a project needs both clarity and personality.
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       <section id="work" className="relative px-5 py-20 md:px-10">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between" data-reveal>
-            <div>
-              <p className="text-xs uppercase tracking-[0.45em] text-crimson">Selected work</p>
-              <h2 className="mt-4 font-serif text-[clamp(2.5rem,4vw,4rem)] text-white">Where AI, branding, and storytelling meet.</h2>
-            </div>
-            <p className="max-w-2xl text-sm leading-7 text-stone-200/85 md:text-base">
-              A focused look at the projects where I’ve shaped immersive digital experiences, refined brand narratives, and built interfaces that feel both intelligent and emotionally resonant.
+        <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-start">
+          <div data-reveal className="pt-4 md:pt-10">
+            <p className="text-xs uppercase tracking-[0.45em] text-crimson">Selected work</p>
+            <h2 className="mt-6 font-serif text-[clamp(2.5rem,4vw,4rem)] text-white">Where products, stories, and systems meet.</h2>
+          </div>
+
+          <div
+            data-reveal
+            className="pt-6 md:pt-16"
+          >
+            <p className="max-w-3xl text-sm leading-7 text-stone-200/85 md:text-base">
+              A focused look at the projects where I’ve shaped immersive digital experiences, refined narratives, and built work that balances logic, usability, and mood.
             </p>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className="mt-10 grid gap-5 md:col-span-2 md:grid-cols-2">
             {projects.map((project, index) => (
               <motion.article
                 key={project.title}
@@ -429,6 +414,7 @@ export default function Home() {
                 </div>
                 <div className="p-5">
                   <h3 className="font-serif text-2xl text-white">{project.title}</h3>
+                  <p className="mt-2 text-xs uppercase tracking-[0.28em] text-stone-200/70">{project.elevatorPitch}</p>
                   <p className="mt-3 text-sm leading-7 text-stone-200/85">{project.description}</p>
                 </div>
               </motion.article>
@@ -473,12 +459,33 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="resume" className="relative px-5 py-20 md:px-10">
+        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 rounded-[2rem] border border-white/10 bg-black/70 px-6 py-8 md:flex-row md:items-center md:px-8">
+          <div data-reveal>
+            <p className="text-xs uppercase tracking-[0.45em] text-crimson">Resume</p>
+            <h2 className="mt-4 font-serif text-[clamp(2.4rem,4vw,3.6rem)] leading-none text-white">
+              Download my resume.
+            </h2>
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-200/85 md:text-base">
+              A concise snapshot of my experience, projects, and the kinds of systems I like building.
+            </p>
+          </div>
+          <a
+            href="/Harshita-Cv%20(8).pdf"
+            download
+            className="inline-flex items-center rounded-full border border-crimson/60 bg-crimson/15 px-5 py-3 text-sm uppercase tracking-[0.25em] text-stone-100 transition hover:bg-crimson/25"
+          >
+            Download Resume
+          </a>
+        </div>
+      </section>
+
       <section id="skills" className="relative px-5 py-20 md:px-10">
         <div className="mx-auto max-w-7xl">
           <div data-reveal className="max-w-3xl">
             <p className="text-xs uppercase tracking-[0.45em] text-crimson">Skills</p>
             <h2 className="mt-4 font-serif text-[clamp(2.5rem,4vw,4rem)] leading-none text-white">
-              Built to move between intuition and systems.
+              Built to move between intuition, systems, and taste.
             </h2>
           </div>
 
@@ -567,8 +574,8 @@ export default function Home() {
         </div>
 
         <footer className="mx-auto mt-16 flex max-w-7xl flex-col gap-3 border-t border-white/10 pt-6 text-xs uppercase tracking-[0.2em] text-stone-300 md:flex-row md:items-center md:justify-between">
-          <span>Frontend Engineer + Creative Technologist</span>
-          <span>Designed for cinematic digital presence</span>
+          <span>Harshita Handa</span>
+          <span>Portfolio</span>
         </footer>
       </section>
 
@@ -625,6 +632,22 @@ export default function Home() {
                   </button>
                 </div>
                 <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-100/85 md:text-base">{activeProject.description}</p>
+                <div className="mt-6 grid gap-3 md:grid-cols-2">
+                  <div className="rounded-[1.2rem] border border-white/10 bg-white/[0.02] p-4">
+                    <p className="text-xs uppercase tracking-[0.35em] text-mist/80">Elevator pitch</p>
+                    <p className="mt-3 text-sm leading-7 text-white/90">{activeProject.elevatorPitch}</p>
+                  </div>
+                  <div className="rounded-[1.2rem] border border-white/10 bg-white/[0.02] p-4">
+                    <p className="text-xs uppercase tracking-[0.35em] text-mist/80">Tech</p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {activeProject.tech.map((item) => (
+                        <span key={item} className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs text-stone-100">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
                 <div className="mt-6 flex flex-wrap gap-3">
                   {activeProject.stats.map((stat) => (
                     <span key={stat} className="rounded-full border border-white/10 bg-white/[0.02] px-4 py-2 text-sm text-stone-100">
