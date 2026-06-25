@@ -471,7 +471,7 @@ export default function Home() {
             </p>
           </div>
           <a
-            href="/Harshita-Cv%20(8).pdf"
+            href="/Harshita_Handa_Resume.pdf"
             download
             className="inline-flex items-center rounded-full border border-crimson/60 bg-crimson/15 px-5 py-3 text-sm uppercase tracking-[0.25em] text-stone-100 transition hover:bg-crimson/25"
           >
